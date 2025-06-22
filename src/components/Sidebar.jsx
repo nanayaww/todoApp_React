@@ -4,10 +4,11 @@ import { useState } from "react";
 import List from "./List";
 import { useSelector } from "react-redux";
 import { Alltask } from "../redux/taskSlice";
+import { Lists } from "../redux/listSlice";
 
 export default function Sidebar() {
   const [createList, setCreateList] = useState(false);
-  const list = useSelector((state) => state.create.list);
+  const list = useSelector(Lists);
   const task = useSelector(Alltask);
 
   function handleClick() {

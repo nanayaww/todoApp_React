@@ -6,9 +6,10 @@ import { useSelector } from "react-redux";
 // import { add } from "../redux/taskSlice";
 import { useAddTasks } from "../hooks/useAddTAsks";
 import { useAuth } from "../contexts/AuthContext";
+import { Lists } from "../redux/listSlice";
 
 export default function TaskBar({ newList, setNewList }) {
-  const list = useSelector((state) => state.create.list);
+  const list = useSelector(Lists);
   // const dispatch = useDispatch();
   const { createTask } = useAddTasks();
   const { currentUser } = useAuth();
@@ -19,7 +20,8 @@ export default function TaskBar({ newList, setNewList }) {
     definedCategory: "",
   });
 
-  function handleSetTask() {
+  function handleSetTask(e) {
+    e.preventDefault();
     createTask(currentUser.uid, taskItem);
     setTaskItem({
       title: "",
@@ -51,7 +53,7 @@ export default function TaskBar({ newList, setNewList }) {
         </span>
       </div>
 
-      <form action="" onSubmit={handleSetTask}>
+      <form action="" onSubmit={(e) => handleSetTask(e)}>
         <div className=" flex justify-end ">
           <label htmlFor="category"></label>
           <select
@@ -98,7 +100,8 @@ export default function TaskBar({ newList, setNewList }) {
               color: "#000",
             }}
             value="Add"
-            onclick={handleSetTask}
+            // onclick={handleSetTask}
+            type="submit"
           />
         </div>
       </form>

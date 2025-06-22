@@ -6,8 +6,7 @@ import Settings from "./Settings";
 export default function Navbar() {
   const [showSettings, setShowsettings] = useState(false);
   const { currentUser } = useAuth();
-  // const username = currentUser?.displayName || "User";
-  const username = "User";
+  const username = currentUser?.displayName || "User";
 
   console.log(currentUser);
 

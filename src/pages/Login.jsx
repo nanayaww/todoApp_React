@@ -25,13 +25,13 @@ export default function Login() {
 
       await logIn(email, password);
 
-      navigate("/");
       localStorage.setItem("uid", JSON.stringify(currentUser.uid));
-
       const uid = localStorage.getItem("uid");
       console.log(uid);
 
       loadUserTasks(uid);
+
+      navigate("/");
     } catch {
       console.error("Invalid credentials");
     }
@@ -63,6 +63,7 @@ export default function Login() {
           </div>
           <div className=" flex justify-center ">
             <button
+              disabled={loading}
               type="submit"
               className="w-full bg-black text-white rounded-2xl px-6 py-2.5 mt-5"
             >

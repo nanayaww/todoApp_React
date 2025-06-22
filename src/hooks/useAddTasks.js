@@ -37,6 +37,8 @@ export function useAddTasks() {
   // Separate function to load all tasks for a user
   const loadUserTasks = async (userId) => {
     try {
+      console.log(userId);
+
       const taskRef = collection(db, "taskData");
       const q = query(taskRef, where("userId", "==", userId));
       const querySnapshot = await getDocs(q);

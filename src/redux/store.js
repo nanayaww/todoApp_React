@@ -5,7 +5,7 @@ import listReducer from "./listSlice";
 
 export const store = configureStore({
   reducer: {
-    add: taskReducer,
-    create: listReducer,
+    task: taskReducer,
+    list: listReducer,
   },
 });

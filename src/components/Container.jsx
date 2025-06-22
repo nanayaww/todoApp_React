@@ -4,14 +4,11 @@ import Card from "../components/Card";
 import Tabs from "./Tabs";
 import { useState, useEffect } from "react";
 import { Alltask } from "../redux/taskSlice";
-import { useAddTasks } from "../hooks/useAddTAsks";
-import { useAuth } from "../contexts/AuthContext";
 
 export default function Container({ setNewList }) {
   const tasks = useSelector(Alltask);
   const [currentTasks, setCurrentTask] = useState(tasks);
   const [cardId, setCardId] = useState("");
-  const { loadUserTasks } = useAddTasks();
 
   console.log(tasks);
 

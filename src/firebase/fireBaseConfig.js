@@ -9,7 +9,7 @@ import { getAuth } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBBUq8qU1uJ2TFS2ronw-tuVsudLD7nabk",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "todo-app-199fb.firebaseapp.com",
   projectId: "todo-app-199fb",
   storageBucket: "todo-app-199fb.firebasestorage.app",
