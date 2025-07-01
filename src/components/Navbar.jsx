@@ -6,7 +6,8 @@ import Settings from "./Settings";
 export default function Navbar() {
   const [showSettings, setShowsettings] = useState(false);
   const { currentUser } = useAuth();
-  const username = currentUser?.displayName || "User";
+  const username = currentUser.displayName;
+  const email = currentUser.email;
 
   // console.log(currentUser);
 
@@ -22,7 +23,7 @@ export default function Navbar() {
       </div>
       <div className=" text-2xl relative">
         <CgProfile onClick={handleClick} />
-        {showSettings && <Settings />}
+        {showSettings && <Settings email={email} />}
       </div>
     </div>
   );

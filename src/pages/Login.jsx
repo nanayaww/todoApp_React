@@ -32,7 +32,7 @@ export default function Login() {
 
       localStorage.setItem("uid", user.uid);
 
-      // Load user tasks with the actual UID
+      // Load user tasks with the UID
       await loadUserTasks(user.uid);
       console.log("Tasks loaded successfully");
 
