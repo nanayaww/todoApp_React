@@ -9,7 +9,7 @@ import {
   isEditingDataContext,
   TaskBarIsOpenContext,
 } from "../pages/Dashboard";
-import { useAddTasks } from "../hooks/useAddTAsks";
+import { useAddTasks } from "../hooks/useAddTasks";
 
 export default function Options({ setIsOpen, id }) {
   const tasks = useSelector(Alltask);

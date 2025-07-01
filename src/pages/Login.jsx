@@ -3,7 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import FormInput from "../components/FormInput";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { useAddTasks } from "../hooks/useAddTAsks";
+import { useAddTasks } from "../hooks/useAddTasks";
 
 export default function Login() {
   const [email, setEmail] = useState("");
