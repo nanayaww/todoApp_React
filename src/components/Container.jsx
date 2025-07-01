@@ -2,13 +2,14 @@ import { useSelector } from "react-redux";
 import Button from "../components/Button";
 import Card from "../components/Card";
 import Tabs from "./Tabs";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Alltask } from "../redux/taskSlice";
+import { TaskBarIsOpenContext } from "../pages/Dashboard";
 
-export default function Container({ setNewList }) {
+export default function Container() {
   const tasks = useSelector(Alltask);
   const [currentTasks, setCurrentTask] = useState(tasks);
-  const [cardId, setCardId] = useState("");
+  const { setNewList } = useContext(TaskBarIsOpenContext);
 
   console.log(tasks);
 
@@ -21,12 +22,12 @@ export default function Container({ setNewList }) {
 
   function filterPendingTasks() {
     // Filter for tasks with status === true (pending)
-    setCurrentTask(tasks.filter((task) => task.status === true));
+    setCurrentTask(tasks.filter((task) => task.status !== false));
   }
 
   function filterCompletedTasks() {
     // Filter for tasks with status === false (completed)
-    setCurrentTask(tasks.filter((task) => task.status === false));
+    setCurrentTask(tasks.filter((task) => task.status !== true));
   }
 
   function allTasks() {
@@ -64,8 +65,6 @@ export default function Container({ setNewList }) {
               key={item.id || index}
               title={item.title}
               note={item.note}
-              showOptions={cardId === item.id}
-              setCardId={setCardId}
               id={item.id}
             />
           ))

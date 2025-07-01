@@ -1,43 +1,70 @@
 import { IoMdClose } from "react-icons/io";
 import Button from "./Button";
 import FormInput from "./FormInput";
-import { useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 // import { add } from "../redux/taskSlice";
 import { useAddTasks } from "../hooks/useAddTAsks";
 import { useAuth } from "../contexts/AuthContext";
 import { Lists } from "../redux/listSlice";
+import { useClickOutside } from "../hooks/useClickOutside";
+import {
+  isEditingContext,
+  isEditingDataContext,
+  TaskBarIsOpenContext,
+} from "../pages/Dashboard";
 
-export default function TaskBar({ newList, setNewList }) {
+export default function TaskBar() {
+  const ref = useRef();
   const list = useSelector(Lists);
   // const dispatch = useDispatch();
-  const { createTask } = useAddTasks();
+  const { createTask, updateUserTask } = useAddTasks();
   const { currentUser } = useAuth();
-
+  const { newList, setNewList } = useContext(TaskBarIsOpenContext);
+  const { isEditing, setIsEditing } = useContext(isEditingContext);
+  const { isEditingData } = useContext(isEditingDataContext);
   const [taskItem, setTaskItem] = useState({
     title: "",
     note: "",
     definedCategory: "",
   });
+  const { id } = isEditingData;
+
+  useEffect(() => {
+    if (isEditing) {
+      setNewList(true);
+      setTaskItem(isEditingData);
+      // setIsEditing(false);
+    }
+  }, [isEditing, isEditingData, setNewList]);
+
+  // function to handle click outside events
+  useClickOutside(closeTaskBar, ref);
 
   function handleSetTask(e) {
     e.preventDefault();
-    createTask(currentUser.uid, taskItem);
+
+    if (isEditing) {
+      updateUserTask(id, taskItem);
+      setIsEditing(false);
+    } else {
+      createTask(currentUser.uid, taskItem);
+    }
+
+    // Clear after save
     setTaskItem({
       title: "",
       note: "",
-      // status: "false",
       definedCategory: "",
     });
-    // dispatch(add(taskItem));
-    closeTaskBar();
 
-    console.log(taskItem);
+    closeTaskBar();
   }
 
   function closeTaskBar() {
     setNewList(false);
   }
+
   return (
     <div
       className={` ${
@@ -45,6 +72,7 @@ export default function TaskBar({ newList, setNewList }) {
           ? "translate-x-[0%] active:transition active:delay-1000 duration-75 ease-in-out"
           : "hidden"
       }  bg-black text-white p-4 rounded-l-2xl absolute right-0 z-50 flex-1 min-h-screen w-[30%] max-w-80 `}
+      ref={ref}
     >
       <div className=" flex justify-between items-center ">
         <h2 className=" text-2xl">Task</h2>
@@ -67,7 +95,7 @@ export default function TaskBar({ newList, setNewList }) {
             <option value="">Select</option>
             {list.map((item, index) => {
               return (
-                <option key={index} value={taskItem.definedCategory}>
+                <option key={index} value={item}>
                   {item}
                 </option>
               );
@@ -99,8 +127,7 @@ export default function TaskBar({ newList, setNewList }) {
               marginTop: "12px",
               color: "#000",
             }}
-            value="Add"
-            // onclick={handleSetTask}
+            value={isEditing ? "Update" : "Add"}
             type="submit"
           />
         </div>

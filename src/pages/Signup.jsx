@@ -10,6 +10,8 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [checkbox, setCheckbox] = useState(!false);
+
   const [error, setError] = useState("");
   const [loading, setLoding] = useState(false);
   const { currentUser, signUp } = useAuth();
@@ -66,7 +68,7 @@ export default function Signup() {
             <FormInput
               id="userPassword"
               label="Password"
-              type="password"
+              type={checkbox ? "password" : "text"}
               value={password}
               onChange={(e) => {
                 setError(null);
@@ -77,7 +79,7 @@ export default function Signup() {
             <FormInput
               id="confirmPassword"
               label="Confirm Password"
-              type="password"
+              type={checkbox ? "password" : "text"}
               value={confirmPassword}
               onChange={(e) => {
                 setError(null);
@@ -85,6 +87,21 @@ export default function Signup() {
               }}
               error={error}
             />
+          </div>
+          <div>
+            <span className=" flex gap-2 mt-2">
+              <input
+                id="showPassword"
+                label="Show Password"
+                type="checkbox"
+                value={checkbox}
+                onChange={(e) => {
+                  setCheckbox(!e.target.checked);
+                  console.log(checkbox);
+                }}
+              />
+              <label htmlFor="showPassword">Show Password</label>
+            </span>
           </div>
 
           <div>

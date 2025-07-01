@@ -1,4 +1,9 @@
-export default function Button({ style, value, onclick, type = "button" }) {
+export default function Button({
+  style,
+  value,
+  onclick = null,
+  type = "button",
+}) {
   return (
     <div>
       <button

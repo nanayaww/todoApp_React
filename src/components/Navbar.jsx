@@ -8,7 +8,7 @@ export default function Navbar() {
   const { currentUser } = useAuth();
   const username = currentUser?.displayName || "User";
 
-  console.log(currentUser);
+  // console.log(currentUser);
 
   function handleClick() {
     setShowsettings(!showSettings);

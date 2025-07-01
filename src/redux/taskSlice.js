@@ -1,7 +1,10 @@
 // taskSlice.js
 import { createSlice } from "@reduxjs/toolkit";
+import { loadFromLocalStorage } from "./LocalStorage";
 
-const initialState = [];
+// Load the persisted task state or fallback to an empty array
+const savedState = loadFromLocalStorage();
+const initialState = savedState?.task || [];
 
 const taskSlice = createSlice({
   name: "task",
@@ -10,12 +13,14 @@ const taskSlice = createSlice({
     add: (state, action) => {
       state.push(action.payload);
     },
-    // Added additional reducers for better task management
     setTasks: (state, action) => {
       return action.payload;
     },
     updateTask: (state, action) => {
       const index = state.findIndex((task) => task.id === action.payload.id);
+      console.log(action.payload);
+      console.log(index);
+
       if (index !== -1) {
         state[index] = { ...state[index], ...action.payload };
       }
@@ -26,11 +31,10 @@ const taskSlice = createSlice({
   },
 });
 
-// Fixed: Export selector function
 export const Alltask = (state) => state.task;
 
-// Export actions
+// Actions
 export const { add, setTasks, updateTask, removeTask } = taskSlice.actions;
 
-// Export reducer
+// Reducer
 export default taskSlice.reducer;

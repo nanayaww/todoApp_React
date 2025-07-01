@@ -10,7 +10,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setIsLoading] = useState(false);
-  const { currentUser, logIn } = useAuth();
+  const [checkbox, setCheckbox] = useState(!false);
+  const { logIn } = useAuth();
   const { loadUserTasks } = useAddTasks();
 
   const navigate = useNavigate();
@@ -21,58 +22,90 @@ export default function Login() {
     try {
       setError("");
       setIsLoading(true);
-      console.log(email, password);
+      console.log("Attempting login with:", email);
 
-      await logIn(email, password);
+      // Wait for login to complete and get the user credential
+      const userCredential = await logIn(email, password);
+      const user = userCredential.user;
 
-      localStorage.setItem("uid", JSON.stringify(currentUser.uid));
-      const uid = localStorage.getItem("uid");
-      console.log(uid);
+      console.log("Login successful, user ID:", user.uid);
 
-      loadUserTasks(uid);
+      localStorage.setItem("uid", user.uid);
 
+      // Load user tasks with the actual UID
+      await loadUserTasks(user.uid);
+      console.log("Tasks loaded successfully");
+
+      // Navigate to home page
       navigate("/");
-    } catch {
-      console.error("Invalid credentials");
+    } catch (error) {
+      console.error("Login failed:", error);
+      setError("Invalid credentials. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   }
 
   return (
     <div className="min-h-screen flex items-center bg-black-300 justify-center font-sans">
       <div className=" w-[60%] max-w-[25rem] bg-black-100 rounded-2xl px-20 py-10 shadow-2xl ">
         <h1 className=" text-center pt-2 text-2xl font-bold">Login</h1>
+
+        {/* Display error message */}
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            {error}
+          </div>
+        )}
+
         <form action="" onSubmit={handleSubmit}>
           <div>
             <FormInput
               id="userEmail"
               label="Email"
-              type="text"
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               error={error}
+              required
             />
             <FormInput
               id="userPassword"
               label="Password"
-              type="password"
+              type={checkbox ? "password" : "text"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               error={error}
+              required
             />
           </div>
           <div className=" flex justify-center ">
             <button
               disabled={loading}
               type="submit"
-              className="w-full bg-black text-white rounded-2xl px-6 py-2.5 mt-5"
+              className="w-full bg-black text-white rounded-2xl px-6 py-2.5 mt-5 disabled:opacity-50"
             >
-              Login
+              {loading ? "Logging in..." : "Login"}
             </button>
           </div>
         </form>
-        <div className=" mt-1 underline text-blue-600 text-sm  ">
-          <a href="">Forgot Password?</a>
+        <div className=" mt-3 text-sm flex justify-between  ">
+          <span className=" underline text-blue-600">
+            <a href="">Forgot Password?</a>
+          </span>{" "}
+          <span>
+            <input
+              id="showPassword"
+              label="Show Password"
+              type="checkbox"
+              value={checkbox}
+              onChange={(e) => {
+                setCheckbox(!e.target.checked);
+                console.log(checkbox);
+              }}
+            />
+            <label htmlFor="showPassword">Show Password</label>
+          </span>
         </div>
         <div>
           <button className="w-full bg-black text-white rounded-2xl px-6 py-2.5 mt-5 flex items-center justify-center gap-2">

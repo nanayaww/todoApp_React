@@ -1,5 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = ["welcome"];
+import { loadFromLocalStorage } from "./LocalStorage";
+
+const initialState = () => {
+  if (loadFromLocalStorage() !== undefined) {
+    return loadFromLocalStorage()?.list;
+  } else {
+    return ["welcome"];
+  }
+};
 
 const listSlice = createSlice({
   name: "create",

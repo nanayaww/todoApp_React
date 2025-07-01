@@ -10,6 +10,7 @@ export default function Settings() {
 
     try {
       await logOut();
+      window.localStorage.clear();
       navigate("/logIn");
     } catch {
       console.error("unable to log out");

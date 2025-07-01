@@ -10,9 +10,9 @@ import { getAuth } from "firebase/auth";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: "todo-app-199fb.firebaseapp.com",
-  projectId: "todo-app-199fb",
-  storageBucket: "todo-app-199fb.firebasestorage.app",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: "350710959592",
   appId: "1:350710959592:web:bed404b62373c5c6a4a85d",
   measurementId: "G-FR2VK8DY40",
@@ -26,5 +26,3 @@ const app = initializeApp(firebaseConfig);
 // export default firebase.firestore();
 export const db = getFirestore(app);
 export const auth = getAuth(app);
-
-console.log(auth);

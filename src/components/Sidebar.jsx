@@ -17,7 +17,7 @@ export default function Sidebar() {
   }
 
   function filterTaskByList(item) {
-    console.log(name);
+    console.log(item);
   }
 
   return (
