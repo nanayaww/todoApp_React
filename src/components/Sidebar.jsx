@@ -9,11 +9,9 @@ import { Lists } from "../redux/listSlice";
 export default function Sidebar() {
   const [createList, setCreateList] = useState(false);
   const list = useSelector(Lists);
-  const task = useSelector(Alltask);
 
   function handleClick() {
     setCreateList(true);
-    console.log(list);
   }
 
   function filterTaskByList(item) {
@@ -26,9 +24,9 @@ export default function Sidebar() {
         <ul className="flex flex-col gap-2 ">
           {list.map((item, index) => (
             <List
-              onclick={() => filterTaskByList(item)}
+              onclick={() => filterTaskByList(item.title)}
               key={index}
-              name={item}
+              name={item.title}
             />
           ))}
         </ul>
@@ -37,7 +35,7 @@ export default function Sidebar() {
         <NewList createList={createList} setCreateList={setCreateList} />
         <div
           onClick={handleClick}
-          className="flex items-center gap-2 rounded-2xl p-3 bg-black-100 hover:bg-black hover:text-white transition delay-40 ease-in-out "
+          className="flex items-center gap-2 rounded-sm px-2.5 py-1.5 bg-black-400 hover:bg-black hover:text-white transition delay-40 ease-in-out "
         >
           <CgAdd />
           Create new list

@@ -3,26 +3,52 @@ import { Alltask } from "../redux/taskSlice";
 import { FaCheck } from "react-icons/fa";
 import { RiEdit2Fill } from "react-icons/ri";
 import { MdDelete } from "react-icons/md";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import {
   isEditingContext,
   isEditingDataContext,
   TaskBarIsOpenContext,
 } from "../pages/Dashboard";
 import { useAddTasks } from "../hooks/useAddTasks";
+import { CurrentTaskContext } from "./Container";
 
 export default function Options({ setIsOpen, id }) {
   const tasks = useSelector(Alltask);
+  const { currentTasks, setCurrentTask } = useContext(CurrentTaskContext);
   const { setIsEditing } = useContext(isEditingContext);
   const { setIsEditingData } = useContext(isEditingDataContext);
   const { toggleTaskStatus, deleteTask } = useAddTasks();
 
+  // Sync currentTasks with tasks from Redux when tasks change
+  // useEffect(() => {
+  //   setCurrentTask(tasks);
+  // }, [tasks, setCurrentTask]);
+
+  // function allTasks() {
+  //   setCurrentTask(tasks);
+  // }
+
+  // function filterPendingTasks() {
+  //   // Filter for tasks with status === true (pending)
+  //   setCurrentTask(tasks.filter((task) => task.status === false));
+  // }
+
+  // function filterCompletedTasks() {
+  //   // Filter for tasks with status === false (completed)
+  //   setCurrentTask(tasks.filter((task) => task.status === true));
+  // }
+
+  // Function to handle whether a task has been completed or not.
   function handlecheck() {
     const task = tasks.filter((task) => task.id === id);
     if (task) {
       console.log(task[0].status);
 
       toggleTaskStatus(id, task[0].status);
+      setCurrentTask(currentTasks);
+      // filterPendingTasks();
+      // filterCompletedTasks();
+      // allTasks();
     }
 
     console.log(task);
@@ -39,6 +65,7 @@ export default function Options({ setIsOpen, id }) {
   function handleDelete() {
     deleteTask(id);
   }
+
   const optionStyle =
     " flex items-center gap-2 hover:bg-black-900 rounded-sm px-2 cursor-pointer";
 

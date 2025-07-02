@@ -5,21 +5,23 @@ import { useDispatch } from "react-redux";
 import { create } from "../redux/listSlice";
 
 export default function NewList({ createList, setCreateList }) {
-  const [inputValue, setInputValue] = useState("");
+  const [listItem, setListItem] = useState({ title: "" });
   const dispatch = useDispatch();
 
   function handleChange(e) {
-    setInputValue(e.target.value);
+    setListItem({ title: e.target.value });
   }
 
   function handleClick() {
-    dispatch(create(inputValue));
+    if (listItem.title !== "") {
+      dispatch(create(listItem));
+    }
     closeCreateList();
   }
 
   function closeCreateList() {
     setCreateList(false);
-    setInputValue("");
+    setListItem({ title: "" });
   }
 
   return (
@@ -33,7 +35,7 @@ export default function NewList({ createList, setCreateList }) {
         <div className="mt-3">
           <input
             onChange={(e) => handleChange(e)}
-            value={inputValue}
+            value={listItem.title}
             className=" w-full border rounded-2xl p-2"
             type="text"
           />
@@ -46,7 +48,7 @@ export default function NewList({ createList, setCreateList }) {
             marginTop: "12px",
           }}
           value="Create"
-          onclick={handleClick}
+          onclick={() => handleClick()}
         />
       </form>
     </div>

@@ -8,6 +8,11 @@ import { useClickOutside } from "../hooks/useClickOutside";
 export default function Card({ title, note, id }) {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [expandCardItem, setExpandCardItem] = useState(false);
+
+  function handleExpandCardItem() {
+    setExpandCardItem(!expandCardItem);
+  }
 
   useClickOutside(() => {
     setIsOpen(false);
@@ -18,7 +23,9 @@ export default function Card({ title, note, id }) {
       <div className="bg-black-100 flex gap-2">
         <TbListDetails className=" min-w-[40px]" size={"2rem"} />
         <div className=" w-full flex justify-between items-center pr-3">
-          <p>{title}</p>
+          <p className=" cursor-pointer" onClick={handleExpandCardItem}>
+            {title}
+          </p>
           <div className=" p-0.5 hover:bg-black-100 rounded-sm" ref={ref}>
             <SlOptionsVertical
               cursor="pointer"
@@ -30,7 +37,9 @@ export default function Card({ title, note, id }) {
           </div>
         </div>
       </div>
-      <span className=" block bg-black-50 ml-[48px]">{note}</span>
+      {expandCardItem && (
+        <span className=" block bg-black-50 ml-[48px]">{note}</span>
+      )}
     </div>
   );
 }

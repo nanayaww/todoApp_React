@@ -12,13 +12,13 @@ export const isEditingContext = createContext(null);
 export const isEditingDataContext = createContext({});
 
 export default function Dashboard() {
-  const [newList, setNewList] = useState(false);
+  const [openTaskBar, setOpenTaskBar] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isEditingData, setIsEditingData] = useState(false);
 
   return (
     <div className=" flex flex-col ">
-      <TaskBarIsOpenContext.Provider value={{ newList, setNewList }}>
+      <TaskBarIsOpenContext.Provider value={{ openTaskBar, setOpenTaskBar }}>
         <isEditingContext.Provider value={{ isEditing, setIsEditing }}>
           <isEditingDataContext.Provider
             value={{ isEditingData, setIsEditingData }}

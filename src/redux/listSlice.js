@@ -5,7 +5,7 @@ const initialState = () => {
   if (loadFromLocalStorage() !== undefined) {
     return loadFromLocalStorage()?.list;
   } else {
-    return ["welcome"];
+    return [{ title: "welcome" }];
   }
 };
 
@@ -14,6 +14,8 @@ const listSlice = createSlice({
   initialState,
   reducers: {
     create: (state, action) => {
+      console.log(action.payload);
+
       state.push(action.payload);
     },
   },

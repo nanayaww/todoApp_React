@@ -22,7 +22,7 @@ export default function FormInput({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className=" w-full border rounded-2xl p-2 mt-2"
+        className=" w-full border rounded-sm p-2 mt-2"
         required={required}
       />
       {error && <span>{error}</span>}

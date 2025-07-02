@@ -37,7 +37,7 @@ export function useAddTasks() {
         })
       );
 
-      console.log("Task created successfully with ID:", docRef.id);
+      // console.log("Task created successfully with ID:", docRef.id);
     } catch (error) {
       console.error("Error creating task:", error);
     }
@@ -61,7 +61,7 @@ export function useAddTasks() {
 
       dispatch(setTasks(tasks));
 
-      console.log("Loaded tasks:", tasks);
+      // console.log("Loaded tasks:", tasks);
     } catch (error) {
       console.error("Error loading tasks:", error);
     }
@@ -87,7 +87,7 @@ export function useAddTasks() {
         })
       );
 
-      console.log("Task updated successfully:", taskId);
+      // console.log("Task updated successfully:", taskId);
     } catch (error) {
       console.error("Error updating task:", error);
     }
@@ -113,7 +113,7 @@ export function useAddTasks() {
         })
       );
 
-      console.log("Task status toggled:", taskId, "New status:", newStatus);
+      // console.log("Task status toggled:", taskId, "New status:", newStatus);
     } catch (error) {
       console.error("Error toggling task status:", error);
     }
@@ -130,7 +130,7 @@ export function useAddTasks() {
       // Remove from Redux store
       dispatch(removeTask(taskId));
 
-      console.log("Task deleted successfully:", taskId);
+      // console.log("Task deleted successfully:", taskId);
     } catch (error) {
       console.error("Error deleting task:", error);
     }

@@ -17,10 +17,9 @@ import {
 export default function TaskBar() {
   const ref = useRef();
   const list = useSelector(Lists);
-  // const dispatch = useDispatch();
   const { createTask, updateUserTask } = useAddTasks();
   const { currentUser } = useAuth();
-  const { newList, setNewList } = useContext(TaskBarIsOpenContext);
+  const { openTaskBar, setOpenTaskBar } = useContext(TaskBarIsOpenContext);
   const { isEditing, setIsEditing } = useContext(isEditingContext);
   const { isEditingData } = useContext(isEditingDataContext);
   const [taskItem, setTaskItem] = useState({
@@ -32,43 +31,47 @@ export default function TaskBar() {
 
   useEffect(() => {
     if (isEditing) {
-      setNewList(true);
+      setOpenTaskBar(true);
       setTaskItem(isEditingData);
       // setIsEditing(false);
     }
-  }, [isEditing, isEditingData, setNewList]);
+  }, [isEditing, isEditingData, setOpenTaskBar]);
 
   // function to handle click outside events
   useClickOutside(closeTaskBar, ref);
 
   function handleSetTask(e) {
     e.preventDefault();
+    if (
+      taskItem.definedCategory !== "" &&
+      taskItem.note !== "" &&
+      taskItem.title !== ""
+    ) {
+      if (isEditing) {
+        updateUserTask(id, taskItem);
+        setIsEditing(false);
+      } else {
+        createTask(currentUser.uid, taskItem);
+      } // Clear after save
+      setTaskItem({
+        title: "",
+        note: "",
+        definedCategory: "",
+      });
 
-    if (isEditing) {
-      updateUserTask(id, taskItem);
-      setIsEditing(false);
-    } else {
-      createTask(currentUser.uid, taskItem);
+      closeTaskBar();
     }
-
-    // Clear after save
-    setTaskItem({
-      title: "",
-      note: "",
-      definedCategory: "",
-    });
-
-    closeTaskBar();
+    return null;
   }
 
   function closeTaskBar() {
-    setNewList(false);
+    setOpenTaskBar(false);
   }
 
   return (
     <div
       className={` ${
-        newList
+        openTaskBar
           ? "translate-x-[0%] active:transition active:delay-1000 duration-75 ease-in-out"
           : "hidden"
       }  bg-black text-white p-4 rounded-l-2xl absolute right-0 z-50 flex-1 min-h-screen w-[30%] max-w-80 `}
@@ -76,8 +79,11 @@ export default function TaskBar() {
     >
       <div className=" flex justify-between items-center ">
         <h2 className=" text-2xl">Task</h2>
-        <span onClick={() => closeTaskBar()}>
-          <IoMdClose size="1.5rem" />
+        <span
+          className=" hover:bg-white hover:text-black rounded-full p-1.5 "
+          onClick={() => closeTaskBar()}
+        >
+          <IoMdClose size="1rem" />
         </span>
       </div>
 
@@ -85,7 +91,7 @@ export default function TaskBar() {
         <div className=" flex justify-end ">
           <label htmlFor="category"></label>
           <select
-            className=" border rounded-2xl px-3 py-2 bg-white text-black"
+            className=" border rounded-sm px-2.5 py-1.5 bg-white text-black"
             name="category"
             id="category"
             onChange={(e) =>
@@ -95,8 +101,8 @@ export default function TaskBar() {
             <option value="">Select</option>
             {list.map((item, index) => {
               return (
-                <option key={index} value={item}>
-                  {item}
+                <option key={index} value={item.title}>
+                  {item.title}
                 </option>
               );
             })}
@@ -110,7 +116,7 @@ export default function TaskBar() {
           placeholder="type here"
         />
         <textarea
-          className="w-full min-h-40 border rounded-2xl p-2 mt-10"
+          className="w-full min-h-40 border rounded-sm p-2 mt-10"
           name=""
           id=""
           placeholder="add note..."
@@ -121,8 +127,6 @@ export default function TaskBar() {
         <div>
           <Button
             style={{
-              padding: "5px 24px",
-              borderRadius: "16px",
               backgroundColor: "#fff",
               marginTop: "12px",
               color: "#000",

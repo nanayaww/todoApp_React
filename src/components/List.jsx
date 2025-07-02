@@ -1,6 +1,9 @@
 export default function List({ onclick, name }) {
   return (
-    <li onClick={() => onclick(name)} className=" rounded-2xl p-2 bg-black-100">
+    <li
+      onClick={() => onclick(name)}
+      className=" rounded-sm px-2.5 py-1.5 bg-black-300"
+    >
       {name}
     </li>
   );
