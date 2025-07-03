@@ -12,9 +12,12 @@ import {
 import { useDispatch } from "react-redux";
 import { db } from "../firebase/fireBaseConfig";
 import { add, removeTask, setTasks, updateTask } from "../redux/taskSlice";
+import { ShowToastContext } from "../pages/Dashboard";
+import { useContext } from "react";
 
 export function useAddTasks() {
   const dispatch = useDispatch();
+  // const { showToast } = useContext(ShowToastContext);
 
   const createTask = async (userId, taskData) => {
     try {

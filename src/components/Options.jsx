@@ -12,7 +12,7 @@ import {
 import { useAddTasks } from "../hooks/useAddTasks";
 import { CurrentTaskContext } from "./Container";
 
-export default function Options({ setIsOpen, id }) {
+export default function Options({ mousePosition, setIsOpen, id }) {
   const tasks = useSelector(Alltask);
   const { currentTasks, setCurrentTask } = useContext(CurrentTaskContext);
   const { setIsEditing } = useContext(isEditingContext);
@@ -71,9 +71,16 @@ export default function Options({ setIsOpen, id }) {
 
   return (
     <div
-      className={` flex absolute z-50 top-5 right-10 flex-col gap-2 px-2.5 py-5 bg-black text-white rounded-2xl cur`}
+      className={` flex absolute z-50 right-10 flex-col gap-2 px-2.5 py-5 bg-black text-white rounded-2xl cur`}
     >
-      <div className={optionStyle} onClick={handlecheck}>
+      <div
+        className={optionStyle}
+        style={{
+          top: `${mousePosition.y + 5}px`,
+          left: `${mousePosition.x + 5}px`,
+        }}
+        onClick={handlecheck}
+      >
         <FaCheck />
         <span>Check</span>
       </div>

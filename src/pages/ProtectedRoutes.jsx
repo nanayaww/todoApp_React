@@ -15,5 +15,5 @@ export default function ProtectedRoutes({ children }) {
 
   if (loading) return <Loading />; // or return a spinner/loading screen
 
-  return currentUser ? children : null;
+  return currentUser && children;
 }

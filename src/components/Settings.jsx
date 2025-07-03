@@ -18,10 +18,16 @@ export default function Settings({ email }) {
   }
 
   return (
-    <div className=" absolute translate-x-[-8rem] translate-y-3 w-40 bg-black-100  rounded-md text-center px-2.5 py-3 z-20 shadow-md">
-      <div className=" text-sm ">{email}</div>
+    <div className=" flex flex-col gap-3 absolute translate-x-[-10rem] translate-y-3 bg-black-100 rounded-md text-center px-2.5 py-3 z-20 shadow-md">
       <div>
-        <button onClick={handleLogOut} className=" bg-red-500 rounded-sm px-2">
+        <div className=" text-sm ">{email}</div>
+      </div>
+
+      <div className="  ">
+        <button
+          onClick={handleLogOut}
+          className=" bg-red-700 rounded-sm px-2 cursor-pointer w-40"
+        >
           Log Out
         </button>
       </div>

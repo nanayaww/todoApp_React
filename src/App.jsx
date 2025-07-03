@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Signup from "./pages/Signup";
 import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoutes from "./pages/ProtectedRoutes";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/forgotPassword" element={<ForgotPassword />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

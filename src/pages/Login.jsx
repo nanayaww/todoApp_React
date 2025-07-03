@@ -39,7 +39,7 @@ export default function Login() {
       // Navigate to home page
       navigate("/");
     } catch (error) {
-      console.error("Login failed:", error);
+      console.error("Login failed:", { error });
       setError("Invalid credentials. Please try again.");
     } finally {
       setIsLoading(false);
@@ -66,7 +66,6 @@ export default function Login() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              error={error}
               required
             />
             <FormInput
@@ -75,7 +74,6 @@ export default function Login() {
               type={checkbox ? "password" : "text"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              error={error}
               required
             />
           </div>
@@ -83,7 +81,7 @@ export default function Login() {
             <button
               disabled={loading}
               type="submit"
-              className="w-full bg-black text-white rounded-2xl px-6 py-2.5 mt-5 disabled:opacity-50"
+              className="w-full bg-black text-white rounded-2xl px-6 py-2.5 mt-5 disabled:opacity-50 cursor-pointer"
             >
               {loading ? "Logging in..." : "Login"}
             </button>
@@ -91,7 +89,7 @@ export default function Login() {
         </form>
         <div className=" mt-3 text-sm flex justify-between  ">
           <span className=" underline text-blue-600">
-            <a href="">Forgot Password?</a>
+            <Link to="/forgotPassword">Forgot Password?</Link>
           </span>{" "}
           <span>
             <input

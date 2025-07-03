@@ -30,6 +30,7 @@ export default function Signup() {
       console.log(email, password);
 
       const userCredential = await signUp(email, password);
+
       await updateProfile(userCredential.user, {
         displayName: username,
       });
@@ -37,8 +38,16 @@ export default function Signup() {
       navigate("/");
 
       localStorage.setItem("uid", JSON.stringify(currentUser.uid));
-    } catch {
-      console.error("unable to create account");
+    } catch (error) {
+      console.log({ error });
+      const errorCode = error.code;
+      console.log(errorCode);
+
+      if (errorCode === "auth/email-already-in-use") {
+        setError("Email exists");
+      } else {
+        setError("Unable to create account");
+      }
     }
     setLoding(false);
   }
@@ -61,6 +70,7 @@ export default function Signup() {
               id="userEmail"
               label="Email"
               type="email"
+              placeholder="example@gmail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required={true}
@@ -68,6 +78,7 @@ export default function Signup() {
             <FormInput
               id="userPassword"
               label="Password"
+              placeholder="Enter Password"
               type={checkbox ? "password" : "text"}
               value={password}
               onChange={(e) => {
@@ -79,6 +90,7 @@ export default function Signup() {
             <FormInput
               id="confirmPassword"
               label="Confirm Password"
+              placeholder="Confirm Password"
               type={checkbox ? "password" : "text"}
               value={confirmPassword}
               onChange={(e) => {
@@ -108,14 +120,14 @@ export default function Signup() {
             <button
               disabled={loading}
               type="submit"
-              className="w-full bg-black text-white rounded-2xl px-6 py-2.5 mt-5"
+              className="w-full bg-black text-white rounded-2xl px-6 py-2.5 mt-5 cursor-pointer"
             >
               Sign Up
             </button>
           </div>
         </form>
         <div>
-          <button className="w-full bg-black text-white rounded-2xl px-6 py-2.5 mt-5 flex items-center justify-center gap-1">
+          <button className="w-full bg-black text-white rounded-2xl px-6 py-2.5 mt-5 flex items-center justify-center gap-1 cursor-pointer">
             <FcGoogle size="2em" />
             <span>Sign Up with Google</span>
           </button>

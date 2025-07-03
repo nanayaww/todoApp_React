@@ -7,6 +7,7 @@ export default function FormInput({
   placeholder,
   required,
   error,
+  ref,
 }) {
   return (
     <div className="mt-2.5  ">
@@ -17,6 +18,7 @@ export default function FormInput({
       ) : null}
 
       <input
+        ref={ref}
         id={id}
         type={type}
         placeholder={placeholder}
@@ -25,7 +27,7 @@ export default function FormInput({
         className=" w-full border rounded-sm p-2 mt-2"
         required={required}
       />
-      {error && <span>{error}</span>}
+      {error && <span className=" text-red-700 mt-2">{error}</span>}
     </div>
   );
 }

@@ -11,6 +11,7 @@ import { useClickOutside } from "../hooks/useClickOutside";
 import {
   isEditingContext,
   isEditingDataContext,
+  ShowToastContext,
   TaskBarIsOpenContext,
 } from "../pages/Dashboard";
 
@@ -22,6 +23,7 @@ export default function TaskBar() {
   const { openTaskBar, setOpenTaskBar } = useContext(TaskBarIsOpenContext);
   const { isEditing, setIsEditing } = useContext(isEditingContext);
   const { isEditingData } = useContext(isEditingDataContext);
+  // const { showToast, setShowToast } = useContext(ShowToastContext);
   const [taskItem, setTaskItem] = useState({
     title: "",
     note: "",
@@ -50,6 +52,7 @@ export default function TaskBar() {
       if (isEditing) {
         updateUserTask(id, taskItem);
         setIsEditing(false);
+        // setShowToast(!showToast);
       } else {
         createTask(currentUser.uid, taskItem);
       } // Clear after save

@@ -20,8 +20,12 @@ export default function Navbar() {
       <div>
         <h1 className=" font-bold text-2xl font-sans ">Future Note</h1>
       </div>
-      <div className=" text-2xl relative">
-        <CgProfile onClick={handleClick} />
+      <div className=" relative">
+        <CgProfile
+          size="2rem"
+          className="cursor-pointer"
+          onClick={handleClick}
+        />
         {showSettings && <Settings email={email} />}
       </div>
     </div>
