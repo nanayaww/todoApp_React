@@ -39,7 +39,7 @@ export default function Dashboard() {
                 </div>
               </div>{" "}
               <TaskBar />
-              <Toast />
+              {/* <Toast /> */}
             </ShowToastContext.Provider>
           </isEditingDataContext.Provider>
         </isEditingContext.Provider>
