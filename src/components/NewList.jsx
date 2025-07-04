@@ -25,7 +25,11 @@ export default function NewList({ createList, setCreateList }) {
   }
 
   return (
-    <div className={`${createList ? "block" : "hidden"} py-4`}>
+    <div
+      className={`${
+        createList ? "block" : "hidden"
+      } py-4 animate-fade animate-ease-in-out`}
+    >
       <form action="">
         <div className=" flex justify-between items-center ">
           <h2>Create a list</h2>

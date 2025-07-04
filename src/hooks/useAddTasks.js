@@ -12,12 +12,10 @@ import {
 import { useDispatch } from "react-redux";
 import { db } from "../firebase/fireBaseConfig";
 import { add, removeTask, setTasks, updateTask } from "../redux/taskSlice";
-import { ShowToastContext } from "../pages/Dashboard";
-import { useContext } from "react";
+import toast from "react-hot-toast";
 
 export function useAddTasks() {
   const dispatch = useDispatch();
-  // const { showToast } = useContext(ShowToastContext);
 
   const createTask = async (userId, taskData) => {
     try {
@@ -40,9 +38,12 @@ export function useAddTasks() {
         })
       );
 
+      toast.success("created new task");
+
       // console.log("Task created successfully with ID:", docRef.id);
     } catch (error) {
       console.error("Error creating task:", error);
+      toast.error("unable to create new task");
     }
   };
 
@@ -90,9 +91,12 @@ export function useAddTasks() {
         })
       );
 
+      toast.success("edited task");
+
       // console.log("Task updated successfully:", taskId);
     } catch (error) {
       console.error("Error updating task:", error);
+      toast.error("unable to edit task");
     }
   };
 
@@ -116,9 +120,14 @@ export function useAddTasks() {
         })
       );
 
+      newStatus
+        ? toast.success("task completed")
+        : toast.success("task pending");
+
       // console.log("Task status toggled:", taskId, "New status:", newStatus);
     } catch (error) {
       console.error("Error toggling task status:", error);
+      toast.error("unable to toggle task status");
     }
   };
 
@@ -132,10 +141,11 @@ export function useAddTasks() {
 
       // Remove from Redux store
       dispatch(removeTask(taskId));
-
+      toast.success("task deleted successfully");
       // console.log("Task deleted successfully:", taskId);
     } catch (error) {
       console.error("Error deleting task:", error);
+      toast.error("unable to delete task");
     }
   };
   return {

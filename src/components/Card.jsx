@@ -28,8 +28,8 @@ export default function Card({ title, note, id }) {
   }, ref);
 
   return (
-    <div className=" relative px-3 pt-3">
-      <div className="bg-black-100 flex gap-2 rounded-sm shadow">
+    <div className=" relative px-3 pt-3 ">
+      <div className="bg-black-100 flex gap-2 rounded-sm shadow ">
         <TbListDetails className=" min-w-[40px]" size={"2rem"} />
         <div className=" w-full flex justify-between items-center pr-3">
           <p className=" cursor-pointer" onClick={handleExpandCardItem}>

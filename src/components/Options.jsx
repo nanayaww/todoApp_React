@@ -14,7 +14,7 @@ import { CurrentTaskContext } from "./Container";
 
 export default function Options({ mousePosition, setIsOpen, id }) {
   const tasks = useSelector(Alltask);
-  const { currentTasks, setCurrentTask } = useContext(CurrentTaskContext);
+  // const { currentTasks, setCurrentTask } = useContext(CurrentTaskContext);
   const { setIsEditing } = useContext(isEditingContext);
   const { setIsEditingData } = useContext(isEditingDataContext);
   const { toggleTaskStatus, deleteTask } = useAddTasks();
@@ -45,7 +45,7 @@ export default function Options({ mousePosition, setIsOpen, id }) {
       console.log(task[0].status);
 
       toggleTaskStatus(id, task[0].status);
-      setCurrentTask(currentTasks);
+      // setCurrentTask(currentTasks);
       // filterPendingTasks();
       // filterCompletedTasks();
       // allTasks();
@@ -71,7 +71,7 @@ export default function Options({ mousePosition, setIsOpen, id }) {
 
   return (
     <div
-      className={` flex absolute z-50 right-10 flex-col gap-2 px-2.5 py-5 bg-black text-white rounded-2xl cur`}
+      className={` flex absolute z-50 right-10 flex-col gap-2 px-2.5 py-5 bg-black text-white rounded-2xl animate-fade animate-delay-none`}
     >
       <div
         className={optionStyle}

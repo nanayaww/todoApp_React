@@ -3,7 +3,6 @@ import Button from "./Button";
 import FormInput from "./FormInput";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-// import { add } from "../redux/taskSlice";
 import { useAddTasks } from "../hooks/useAddTasks";
 import { useAuth } from "../contexts/AuthContext";
 import { Lists } from "../redux/listSlice";
@@ -11,7 +10,6 @@ import { useClickOutside } from "../hooks/useClickOutside";
 import {
   isEditingContext,
   isEditingDataContext,
-  ShowToastContext,
   TaskBarIsOpenContext,
 } from "../pages/Dashboard";
 
@@ -23,7 +21,6 @@ export default function TaskBar() {
   const { openTaskBar, setOpenTaskBar } = useContext(TaskBarIsOpenContext);
   const { isEditing, setIsEditing } = useContext(isEditingContext);
   const { isEditingData } = useContext(isEditingDataContext);
-  // const { showToast, setShowToast } = useContext(ShowToastContext);
   const [taskItem, setTaskItem] = useState({
     title: "",
     note: "",
@@ -52,7 +49,6 @@ export default function TaskBar() {
       if (isEditing) {
         updateUserTask(id, taskItem);
         setIsEditing(false);
-        // setShowToast(!showToast);
       } else {
         createTask(currentUser.uid, taskItem);
       } // Clear after save
@@ -75,9 +71,9 @@ export default function TaskBar() {
     <div
       className={` ${
         openTaskBar
-          ? "translate-x-[0%] active:transition active:delay-1000 duration-75 ease-in-out"
+          ? "translate-x-[0%] animate-fade animate-ease-in-out "
           : "hidden"
-      }  bg-black text-white p-4 rounded-l-2xl absolute right-0 z-50 flex-1 min-h-screen w-[30%] max-w-80 `}
+      }  bg-black text-white p-4 rounded-l-2xl absolute right-0 z-50 flex-1 min-h-screen w-[30%] max-w-80 animate-fade animate-ease-out`}
       ref={ref}
     >
       <div className=" flex justify-between items-center ">

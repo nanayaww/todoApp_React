@@ -3,22 +3,19 @@ import Navbar from "../components/Navbar";
 import TaskBar from "../components/TaskBar";
 import Sidebar from "../components/Sidebar";
 import { createContext, useState } from "react";
-import Toast from "../components/Toast";
+import { Toaster } from "react-hot-toast";
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const TaskBarIsOpenContext = createContext(null);
+export const TaskBarIsOpenContext = createContext();
 // eslint-disable-next-line react-refresh/only-export-components
-export const isEditingContext = createContext(null);
+export const isEditingContext = createContext();
 // eslint-disable-next-line react-refresh/only-export-components
-export const isEditingDataContext = createContext({});
-// eslint-disable-next-line react-refresh/only-export-components
-export const ShowToastContext = createContext({});
+export const isEditingDataContext = createContext();
 
 export default function Dashboard() {
   const [openTaskBar, setOpenTaskBar] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isEditingData, setIsEditingData] = useState(false);
-  const [showToast, setShowToast] = useState(false);
 
   return (
     <div className=" flex flex-col realative ">
@@ -27,20 +24,20 @@ export default function Dashboard() {
           <isEditingDataContext.Provider
             value={{ isEditingData, setIsEditingData }}
           >
-            <ShowToastContext.Provider value={{ showToast, setShowToast }}>
-              <div className=" w-full min-h-dvh flex flex-col ">
-                <div className=" h-[48] border-b border-black-50">
-                  <Navbar />
-                </div>
+            <div className=" w-full min-h-dvh flex flex-col ">
+              <div className=" h-[48] border-b border-black-50">
+                <Navbar />
+              </div>
 
-                <div className=" relative flex-1 grid grid-cols-4 mt-3 ">
-                  <Sidebar />
-                  <Container />
-                </div>
-              </div>{" "}
-              <TaskBar />
-              {/* <Toast /> */}
-            </ShowToastContext.Provider>
+              <div className=" relative flex-1 grid grid-cols-4 mt-3 ">
+                <Sidebar />
+                <Container />
+              </div>
+            </div>{" "}
+            <TaskBar />
+            <div>
+              <Toaster />
+            </div>
           </isEditingDataContext.Provider>
         </isEditingContext.Provider>
       </TaskBarIsOpenContext.Provider>
