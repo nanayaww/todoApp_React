@@ -40,7 +40,7 @@ export default function Settings({ email, showSettings }) {
     >
       <div>
         <div className=" text-sm ">{email}</div>
-        <div onClick={handleMode}>
+        <div onClick={handleMode} className=" cursor-pointer">
           <span>Appearance: </span>
           {Theme ? (
             <MdLightMode className="inline-block" />

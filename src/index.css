@@ -32,6 +32,9 @@
   }
 }
 
+* {
+  @apply transition-colors;
+}
 /* Now import Tailwind */
 @import "tailwindcss";
 @import "tailwindcss-animated";
