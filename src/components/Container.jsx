@@ -56,7 +56,7 @@ export default function Container() {
             onclick={() => handleclick()}
           />
         </div>
-        <div className="flex gap-4 mt-8 border-b border-black-50 pb-4">
+        <div className="flex gap-4 mt-8 border-b border-black-50 dark:border-black-900 pb-4">
           {/* Fixed: Call the functions directly, not as arrow functions */}
           <Tabs onclick={allTasks} value="All Tasks" />
           <Tabs onclick={filterPendingTasks} value="Pending" />

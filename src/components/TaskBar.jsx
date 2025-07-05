@@ -73,7 +73,7 @@ export default function TaskBar() {
         openTaskBar
           ? "translate-x-[0%] animate-fade animate-ease-in-out "
           : "hidden"
-      }  bg-black text-white p-4 rounded-l-2xl absolute right-0 z-50 flex-1 min-h-screen w-[30%] max-w-80 animate-fade animate-ease-out`}
+      }  bg-light-secondary dark:bg-black-900 text-white p-4 rounded-l-2xl absolute right-0 z-50 flex-1 min-h-screen w-[30%] max-w-80 animate-fade animate-ease-out`}
       ref={ref}
     >
       <div className=" flex justify-between items-center ">
@@ -124,15 +124,7 @@ export default function TaskBar() {
         />
 
         <div>
-          <Button
-            style={{
-              backgroundColor: "#fff",
-              marginTop: "12px",
-              color: "#000",
-            }}
-            value={isEditing ? "Update" : "Add"}
-            type="submit"
-          />
+          <Button value={isEditing ? "Update" : "Add"} type="submit" />
         </div>
       </form>
     </div>

@@ -19,7 +19,7 @@ export default function Sidebar() {
   }
 
   return (
-    <div className=" flex flex-col justify-between col-span-1 bg-black-50 p-4 pb-10 rounded-r-2xl">
+    <div className=" flex flex-col justify-between col-span-1 bg-black-50 dark:bg-black-900 p-4 pb-10 rounded-r-2xl">
       <div>
         <ul className="flex flex-col gap-2 ">
           {list.map((item, index) => (
@@ -35,7 +35,7 @@ export default function Sidebar() {
         <NewList createList={createList} setCreateList={setCreateList} />
         <div
           onClick={handleClick}
-          className="flex items-center gap-2 rounded-sm px-2.5 py-1.5 bg-black-400 hover:bg-black hover:text-white transition delay-40 ease-in-out "
+          className="flex items-center gap-2 rounded-sm px-2.5 py-1.5 bg-black-400 hover:bg-black hover:text-white dark:bg-dark-primary  transition delay-40 ease-in-out "
         >
           <CgAdd />
           Create new list

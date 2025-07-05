@@ -23,7 +23,7 @@ export default function Navbar() {
           className="cursor-pointer"
           onClick={handleClick}
         />
-        {showSettings && <Settings email={email} />}
+        {showSettings && <Settings email={email} showSettings={handleClick} />}
       </div>
     </div>
   );

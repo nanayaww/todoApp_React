@@ -5,10 +5,14 @@ import Signup from "./pages/Signup";
 import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoutes from "./pages/ProtectedRoutes";
 import ForgotPassword from "./pages/ForgotPassword";
+import { useSelector } from "react-redux";
+import { appState } from "./redux/appStateSlice";
 
 function App() {
+  const { Theme } = useSelector(appState);
+
   return (
-    <div className=" font-sans">
+    <div className={` ${Theme && "dark"}  font-sans`}>
       <BrowserRouter>
         <AuthProvider>
           <Routes>

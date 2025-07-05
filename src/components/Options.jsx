@@ -64,6 +64,7 @@ export default function Options({ mousePosition, setIsOpen, id }) {
 
   function handleDelete() {
     deleteTask(id);
+    setIsOpen(false);
   }
 
   const optionStyle =

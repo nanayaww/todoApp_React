@@ -18,14 +18,14 @@ export default function Dashboard() {
   const [isEditingData, setIsEditingData] = useState(false);
 
   return (
-    <div className=" flex flex-col realative ">
+    <div className="  flex flex-col relative dark:bg-dark-background dark:text-dark-text  ">
       <TaskBarIsOpenContext.Provider value={{ openTaskBar, setOpenTaskBar }}>
         <isEditingContext.Provider value={{ isEditing, setIsEditing }}>
           <isEditingDataContext.Provider
             value={{ isEditingData, setIsEditingData }}
           >
             <div className=" w-full min-h-dvh flex flex-col ">
-              <div className=" h-[48] border-b border-black-50">
+              <div className=" h-[48] border-b border-black-50 dark:border-black-900">
                 <Navbar />
               </div>
 
