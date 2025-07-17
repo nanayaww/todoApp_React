@@ -28,7 +28,7 @@ export default function NewList({ createList, setCreateList }) {
     <div
       className={`${
         createList ? "block" : "hidden"
-      } py-4 animate-fade animate-ease-in-out`}
+      }   duration-300 animate-ease-in-out dark:bg-dark-background rounded-lg p-2 mb-4`}
     >
       <form action="">
         <div className=" flex justify-between items-center ">
@@ -40,7 +40,7 @@ export default function NewList({ createList, setCreateList }) {
           <input
             onChange={(e) => handleChange(e)}
             value={listItem.title}
-            className=" w-full border rounded-2xl p-2"
+            className=" w-full border rounded-2xl px-3 py-2"
             type="text"
           />
         </div>

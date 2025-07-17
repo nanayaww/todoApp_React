@@ -2,18 +2,6 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@layer base {
-  @keyframes wiggle {
-    0%,
-    100% {
-      transform: rotate(-3deg);
-    }
-    50% {
-      transform: rotate(3deg);
-    }
-  }
-}
-
 @theme {
   --color-black-50: #f6f6f6;
   --color-black-100: #e7e7e7;
