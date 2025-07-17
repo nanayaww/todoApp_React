@@ -2,13 +2,13 @@ import { useSelector } from "react-redux";
 import Button from "../components/Button";
 import Card from "../components/Card";
 import Tabs from "./Tabs";
-import { useState, useContext, createContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Alltask } from "../redux/taskSlice";
-import { TaskBarIsOpenContext } from "../pages/Dashboard";
 import { useAuth } from "../contexts/AuthContext";
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const CurrentTaskContext = createContext();
+import {
+  CurrentTaskContext,
+  TaskBarIsOpenContext,
+} from "../contexts/AppContext";
 
 export default function Container() {
   const tasks = useSelector(Alltask);

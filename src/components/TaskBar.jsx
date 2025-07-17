@@ -8,10 +8,10 @@ import { useAuth } from "../contexts/AuthContext";
 import { Lists } from "../redux/listSlice";
 import { useClickOutside } from "../hooks/useClickOutside";
 import {
-  isEditingContext,
-  isEditingDataContext,
+  IsEditingContext,
+  IsEditingDataContext,
   TaskBarIsOpenContext,
-} from "../pages/Dashboard";
+} from "../contexts/AppContext";
 
 export default function TaskBar() {
   const ref = useRef();
@@ -19,8 +19,9 @@ export default function TaskBar() {
   const { createTask, updateUserTask } = useAddTasks();
   const { currentUser } = useAuth();
   const { openTaskBar, setOpenTaskBar } = useContext(TaskBarIsOpenContext);
-  const { isEditing, setIsEditing } = useContext(isEditingContext);
-  const { isEditingData } = useContext(isEditingDataContext);
+  const { isEditing, setIsEditing } = useContext(IsEditingContext);
+  const { isEditingData } = useContext(IsEditingDataContext);
+  const [isAddingTask, setIsAddingTask] = useState(false);
   const [taskItem, setTaskItem] = useState({
     title: "",
     note: "",
@@ -47,9 +48,11 @@ export default function TaskBar() {
       taskItem.title !== ""
     ) {
       if (isEditing) {
+        setIsAddingTask(true);
         updateUserTask(id, taskItem);
         setIsEditing(false);
       } else {
+        setIsAddingTask(true);
         createTask(currentUser.uid, taskItem);
       } // Clear after save
       setTaskItem({
@@ -57,7 +60,7 @@ export default function TaskBar() {
         note: "",
         definedCategory: "",
       });
-
+      setIsAddingTask(false);
       closeTaskBar();
     }
     return null;
@@ -125,7 +128,11 @@ export default function TaskBar() {
         />
 
         <div>
-          <Button value={isEditing ? "Update" : "Add"} type="submit" />
+          <Button
+            disable={isAddingTask}
+            value={isEditing ? "Update" : "Add"}
+            type="submit"
+          />
         </div>
       </form>
     </div>

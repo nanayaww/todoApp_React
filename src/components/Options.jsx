@@ -4,19 +4,14 @@ import { FaCheck } from "react-icons/fa";
 import { RiEdit2Fill } from "react-icons/ri";
 import { MdDelete } from "react-icons/md";
 import { useContext, useEffect } from "react";
-import {
-  isEditingContext,
-  isEditingDataContext,
-  TaskBarIsOpenContext,
-} from "../pages/Dashboard";
 import { useAddTasks } from "../hooks/useAddTasks";
-import { CurrentTaskContext } from "./Container";
+import { IsEditingContext, IsEditingDataContext } from "../contexts/AppContext";
 
 export default function Options({ mousePosition, setIsOpen, id }) {
   const tasks = useSelector(Alltask);
   // const { currentTasks, setCurrentTask } = useContext(CurrentTaskContext);
-  const { setIsEditing } = useContext(isEditingContext);
-  const { setIsEditingData } = useContext(isEditingDataContext);
+  const { setIsEditing } = useContext(IsEditingContext);
+  const { setIsEditingData } = useContext(IsEditingDataContext);
   const { toggleTaskStatus, deleteTask } = useAddTasks();
 
   // Sync currentTasks with tasks from Redux when tasks change

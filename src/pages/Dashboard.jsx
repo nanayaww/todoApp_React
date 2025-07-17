@@ -2,15 +2,13 @@ import Container from "../components/Container";
 import Navbar from "../components/Navbar";
 import TaskBar from "../components/TaskBar";
 import Sidebar from "../components/Sidebar";
-import { createContext, useState } from "react";
+import { useState } from "react";
 import { Toaster } from "react-hot-toast";
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const TaskBarIsOpenContext = createContext();
-// eslint-disable-next-line react-refresh/only-export-components
-export const isEditingContext = createContext();
-// eslint-disable-next-line react-refresh/only-export-components
-export const isEditingDataContext = createContext();
+import {
+  IsEditingContext,
+  IsEditingDataContext,
+  TaskBarIsOpenContext,
+} from "../contexts/AppContext";
 
 export default function Dashboard() {
   const [openTaskBar, setOpenTaskBar] = useState(false);
@@ -20,8 +18,8 @@ export default function Dashboard() {
   return (
     <div className="  flex flex-col relative dark:bg-dark-background dark:text-dark-text  ">
       <TaskBarIsOpenContext.Provider value={{ openTaskBar, setOpenTaskBar }}>
-        <isEditingContext.Provider value={{ isEditing, setIsEditing }}>
-          <isEditingDataContext.Provider
+        <IsEditingContext.Provider value={{ isEditing, setIsEditing }}>
+          <IsEditingDataContext.Provider
             value={{ isEditingData, setIsEditingData }}
           >
             <div className=" w-full min-h-dvh flex flex-col ">
@@ -38,8 +36,8 @@ export default function Dashboard() {
             <div>
               <Toaster />
             </div>
-          </isEditingDataContext.Provider>
-        </isEditingContext.Provider>
+          </IsEditingDataContext.Provider>
+        </IsEditingContext.Provider>
       </TaskBarIsOpenContext.Provider>
     </div>
   );

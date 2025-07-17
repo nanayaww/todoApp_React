@@ -1,4 +1,5 @@
 export default function Button({
+  disabled,
   style,
   value,
   onclick = null,
@@ -7,6 +8,7 @@ export default function Button({
   return (
     <div>
       <button
+        disabled={disabled}
         onClick={onclick}
         type={type}
         style={style}
