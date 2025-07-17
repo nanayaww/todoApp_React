@@ -8,7 +8,7 @@ export default function Tabs({ value, onclick }) {
         onclick();
         setClicked(!clicked);
       }}
-      className={` hover:bg-black hover:text-white hover:animate-fade cursor-pointer px-2.5 py-1.5  rounded-sm`}
+      className={` hover:bg-black hover:text-white hover:duration-300 animate-ease-in cursor-pointer px-2.5 py-1.5  rounded-sm`}
     >
       {value}
     </div>

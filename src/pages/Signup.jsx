@@ -13,7 +13,7 @@ export default function Signup() {
   const [checkbox, setCheckbox] = useState(!false);
 
   const [error, setError] = useState("");
-  const [loading, setLoding] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { currentUser, signUp } = useAuth();
   const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ export default function Signup() {
     }
     try {
       setError("");
-      setLoding(true);
+      setLoading(true);
 
       console.log(email, password);
 
@@ -49,7 +49,7 @@ export default function Signup() {
         setError("Unable to create account");
       }
     }
-    setLoding(false);
+    setLoading(false);
   }
 
   return (

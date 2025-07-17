@@ -29,7 +29,7 @@ export default function Dashboard() {
                 <Navbar />
               </div>
 
-              <div className=" relative flex-1 grid grid-cols-4 mt-3 ">
+              <div className=" relative flex-1 grid grid-cols-5 mt-3 ">
                 <Sidebar />
                 <Container />
               </div>

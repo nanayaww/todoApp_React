@@ -19,7 +19,7 @@ export default function Sidebar() {
   }
 
   return (
-    <div className=" flex flex-col justify-between col-span-1 bg-black-50 dark:bg-black-900 p-4 pb-10 rounded-r-2xl">
+    <div className=" max-sm:hidden  flex flex-col justify-between col-span-1 bg-black-50 dark:bg-black-900 px-10 py-10 rounded-r-2xl">
       <div>
         <ul className="flex flex-col gap-2 ">
           {list.map((item, index) => (

@@ -17,7 +17,7 @@ export default function Navbar() {
       <div>
         <h1 className=" font-bold text-2xl font-sans ">Future Note</h1>
       </div>
-      <div className=" relative">
+      <div className=" relative hover:bg-black-800 rounded-lg p-1 ">
         <CgProfile
           size="2rem"
           className="cursor-pointer"

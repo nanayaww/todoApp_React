@@ -74,14 +74,7 @@ export default function Options({ mousePosition, setIsOpen, id }) {
     <div
       className={` flex absolute z-50 right-10 flex-col gap-2 px-2.5 py-5 bg-black text-white rounded-2xl animate-fade animate-delay-none`}
     >
-      <div
-        className={optionStyle}
-        style={{
-          top: `${mousePosition.y + 5}px`,
-          left: `${mousePosition.x + 5}px`,
-        }}
-        onClick={handlecheck}
-      >
+      <div className={optionStyle} onClick={handlecheck}>
         <FaCheck />
         <span>Check</span>
       </div>

@@ -8,7 +8,7 @@ import { TaskBarIsOpenContext } from "../pages/Dashboard";
 import { useAuth } from "../contexts/AuthContext";
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const CurrentTaskContext = createContext(null);
+export const CurrentTaskContext = createContext();
 
 export default function Container() {
   const tasks = useSelector(Alltask);
@@ -41,7 +41,7 @@ export default function Container() {
 
   return (
     <CurrentTaskContext.Provider value={{ currentTasks, setCurrentTask }}>
-      <div className={`col-span-3 px-10 pt-4 md:px-25`}>
+      <div className={`col-span-4 px-10 pt-4 md:px-50`}>
         <div className="flex justify-between items-center">
           <div>
             <h1 className="font-bold text-2xl">Notes</h1>

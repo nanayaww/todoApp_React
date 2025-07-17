@@ -3,7 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { appState, setMode } from "../redux/appStateSlice";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useClickOutside } from "../hooks/useClickOutside";
 
 export default function Settings({ email, showSettings }) {
@@ -12,13 +12,11 @@ export default function Settings({ email, showSettings }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { Theme } = useSelector(appState);
-  const [darkMode, setDarKMode] = useState(false);
 
   useClickOutside(showSettings, ref);
 
   function handleMode() {
-    setDarKMode(!darkMode);
-    dispatch(setMode(darkMode));
+    dispatch(setMode(!Theme));
   }
 
   async function handleLogOut(e) {
@@ -53,7 +51,7 @@ export default function Settings({ email, showSettings }) {
       <div className="  ">
         <button
           onClick={handleLogOut}
-          className=" bg-red-700 rounded-sm px-2 cursor-pointer w-40"
+          className=" bg-red-800 rounded-sm px-2 cursor-pointer w-40 hover:bg-red-600 animate-ease-in duration-300 "
         >
           Log Out
         </button>

@@ -73,7 +73,7 @@ export default function TaskBar() {
         openTaskBar
           ? "translate-x-[0%] animate-fade animate-ease-in-out "
           : "hidden"
-      }  bg-light-secondary dark:bg-black-900 text-white p-4 rounded-l-2xl absolute right-0 z-50 flex-1 min-h-screen w-[30%] max-w-80 animate-fade animate-ease-out`}
+      }  bg-light-secondary dark:bg-black-900 text-white p-4 rounded-l-2xl absolute right-0 z-50 flex-1 min-h-screen w-[30%] max-w-80 duration-100 animate-ease-in`}
       ref={ref}
     >
       <div className=" flex justify-between items-center ">
@@ -93,11 +93,12 @@ export default function TaskBar() {
             className=" border rounded-sm px-2.5 py-1.5 bg-white text-black"
             name="category"
             id="category"
+            required
             onChange={(e) =>
               setTaskItem({ ...taskItem, definedCategory: e.target.value })
             }
           >
-            <option value="">Select</option>
+            <option value="">Select list Category</option>
             {list.map((item, index) => {
               return (
                 <option key={index} value={item.title}>

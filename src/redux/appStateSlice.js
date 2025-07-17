@@ -11,7 +11,7 @@ const appStateSlice = createSlice({
   initialState,
   reducers: {
     setMode: (state, action) => {
-      state.Theme = !action.payload;
+      state.Theme = action.payload;
     },
   },
 });
